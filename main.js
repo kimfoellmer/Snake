@@ -3,13 +3,21 @@ let ctx = canvas.getContext('2d')
 let rows = 20
 let cols = 20
 let snake = [{
-    x: 19,
-    y: 3
+    x:  19,
+    y:3
+},{
+    x:19,
+    y:3
 },{
     x:19,
     y:4
-}
-]
+},{
+    x:19,
+    y:5
+}]
+
+punkteAnzeige = document.getElementById("punkte")
+
 let essen // Variable Essen wird erstellt
 let zellenBreite = canvas.width / cols //Berechnung der Zellenbreite
 let zellenHoehe = canvas.height / rows //Bercehnung der Zellenhöhe
@@ -29,6 +37,7 @@ function zeichnen() {
         ctx.fillRect(snake[i].x*zellenBreite,snake[i].y*zellenHoehe, zellenBreite, zellenHoehe)
     }
     requestAnimationFrame(zeichnen)
+    punkteAnzeige.innerText = score
 }
 
 document.addEventListener(`keydown`, keyDown)
@@ -88,6 +97,7 @@ function gameLoop() {
         )
 
         essenGesammelt = false
+        score = score + 1
     }
 
     snakeArrayAktualisieren();
@@ -140,16 +150,8 @@ function testGameOver() {
             y : 4
         }];
         blickrichtung = `LINKS`
+        punktezahl = 0
     }
 }
-
-function punkte() {
-    let punktezahl = 0
-        if (essenGesammelt === true)
-            punktezahl = punktezahl + 1
-}
-
-
-
 
 
