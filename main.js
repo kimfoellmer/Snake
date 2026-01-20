@@ -10,7 +10,7 @@ let snake = [{
     y:4
 }
 ]
-let essen
+let essen // Variable Essen wird erstellt
 let zellenBreite = canvas.width / cols //Berechnung der Zellenbreite
 let zellenHoehe = canvas.height / rows //Bercehnung der Zellenhöhe
 let blickrichtung = 'LINKS'
