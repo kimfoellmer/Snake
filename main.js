@@ -16,6 +16,36 @@ let snake = [{
     y:5
 }]
 
+let mauer = [{
+    x:10,
+    y:6
+},{
+    x:10,
+    y:7
+},{
+    x:10,
+    y:8
+},{
+    x:10,
+    y:9
+},{
+    x:10,
+    y:10
+},{
+    x:10,
+    y:11
+},{
+    x:10,
+    y:12
+},{
+    x:10,
+    y:13
+},{
+    x:10,
+    y:14
+}]
+
+
 punkteAnzeige = document.getElementById("punkte")
 
 let essen // Variable Essen wird erstellt
@@ -36,8 +66,15 @@ function zeichnen() {
     for (let i = 0; i < snake.length; i++) {
         ctx.fillRect(snake[i].x*zellenBreite,snake[i].y*zellenHoehe, zellenBreite, zellenHoehe)
     }
+
+    ctx.fillStyle = "red"
+    for (let i = 0; i < mauer.length; i++) {
+        ctx.fillRect(mauer[i].x*zellenBreite,mauer[i].y*zellenHoehe, zellenBreite, zellenHoehe)
+    }
+
     requestAnimationFrame(zeichnen)
     punkteAnzeige.innerText = score
+
 }
 
 document.addEventListener(`keydown`, keyDown)
@@ -133,21 +170,21 @@ function testGameOver() {
     let duplicatePart = snakeKoerper.find(part =>
         part.x === snakeKopf.x && part.y === snakeKopf.y)
 
-    if ( snakeKopf.x < 0 ||
-         snakeKopf.x > cols - 1 ||
-         snakeKopf.y < 0 ||
-         snakeKopf.y > rows -1 ||
-         duplicatePart){
+    if (snakeKopf.x < 0 ||
+        snakeKopf.x > cols - 1 ||
+        snakeKopf.y < 0 ||
+        snakeKopf.y > rows - 1 ||
+        duplicatePart) {
 
-        alert ("tot!")
+        alert("tot!")
 
         platziereEssen();
         snake = [{
-            x : 19,
-            y : 3
-        },{
-            x : 19,
-            y : 4
+            x: 19,
+            y: 3
+        }, {
+            x: 19,
+            y: 4
         }];
         blickrichtung = `LINKS`
         punktezahl = 0
