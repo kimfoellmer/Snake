@@ -49,10 +49,12 @@ let mauer = [{
 punkteAnzeige = document.getElementById("punkte")
 
 let essen // Variable Essen wird erstellt
+let giftigesEssen
 let zellenBreite = canvas.width / cols //Berechnung der Zellenbreite
 let zellenHoehe = canvas.height / rows //Bercehnung der Zellenhöhe
 let blickrichtung = 'LINKS'
 let essenGesammelt = false
+let score = 0
 
 
 function zeichnen() {
@@ -94,6 +96,18 @@ function platziereEssen() {
         y: zufallY
     }
 }
+
+function platziereGiftigesEssen() {
+    let zufallX = Math.floor(Math.random() * cols)
+    let zufallY = Math.floor(Math.random() * rows)
+
+    giftigesEssen = {
+        x: zufallX,
+        y: zufallY
+    }
+}
+
+platziereGiftigesEssen()
 
 function keyDown(e){
     if(e.code == `KeyA`){
@@ -170,13 +184,21 @@ function testGameOver() {
     let duplicatePart = snakeKoerper.find(part =>
         part.x === snakeKopf.x && part.y === snakeKopf.y)
 
+    let duplicatePart2 = mauer.find(part =>
+        part.x === snakeKopf.x && part.y === snakeKopf.y)
+
+
     if (snakeKopf.x < 0 ||
         snakeKopf.x > cols - 1 ||
         snakeKopf.y < 0 ||
         snakeKopf.y > rows - 1 ||
-        duplicatePart) {
+
+        duplicatePart ||
+        duplicatePart2) {
 
         alert("tot!")
+
+        score = 0
 
         platziereEssen();
         snake = [{
@@ -187,7 +209,6 @@ function testGameOver() {
             y: 4
         }];
         blickrichtung = `LINKS`
-        punktezahl = 0
     }
 }
 
